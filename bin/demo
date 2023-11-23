@@ -1,0 +1,60 @@
+#!/usr/bin/env php
+<?php
+
+use Mahmodi\CliDemo\Play;
+use Symfony\Component\Console\Application;
+
+/**
+ * Check that is path root directory
+ *
+ * @param string $path
+ * @return boolean
+ */
+function isRoot(string $path):bool
+{
+    if(!is_dir($path))
+        return false;
+
+    return in_array('composer.json', scandir($path));
+}
+
+/**
+ * Returns path of root directory
+ *
+ * @return string
+ */
+function rootDir():string|false
+{
+    
+
+    $levelLimitation = 20;
+
+    $level = 1;
+
+    while($level < $levelLimitation){
+        $dir = dirname(__DIR__, $level);
+
+        if(isRoot($dir))
+            return $dir;
+
+        $level++;
+    }
+
+    return false;
+}
+
+function autload()
+{
+    if(!$rootDir = rootDir())
+        throw new Exception('Root directory not found for load autload.php file !');
+
+    require $rootDir . DIRECTORY_SEPARATOR . 'vendor' . DIRECTORY_SEPARATOR . 'autoload.php';
+}
+
+autload();
+
+$application = new Application('Demo Symfony Console Application Built By Mahdi Mahmodi');
+
+$application->add(new Play());
+
+$application->run();
