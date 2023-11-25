@@ -1,0 +1,25 @@
+{
+    "name": "mahmodi/cli-demo",
+    "description": "I write this CLI application for practice Symfony Console package",
+    "type": "project",
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "Mahmodi\\CliDemo\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "mahdi",
+            "email": "mahmodimahdi26@gmail.com"
+        }
+    ],
+    "bin": "bin/demo",
+    "require": {
+        "php": "^7.4|^8.0",
+        "symfony/console": "^6.3"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^10.4"
+    }
+}
